@@ -9,8 +9,8 @@ function initialize {
   fi
 
   export TLDR_ARCHIVE="tldr.zip"
-  export SITE_HOME="$HOME/site"
-  export SITE_REPO_SLUG="taylorcox75/tldr-pages.github.io"
+  export SITE_HOME="$HOME/tldr/site"
+  export SITE_REPO_SLUG="taylorcox75/tldr"
 
   # Configure git.
   git config --global diff.zip.textconv "unzip -c -a"
@@ -23,7 +23,7 @@ function initialize {
 }
 
 function upload_assets {
-  git clone --quiet --depth 1 git@github.com:${SITE_REPO_SLUG}.git "$SITE_HOME"
+  git clone --quiet --depth 1 -b pages git@github.com:${SITE_REPO_SLUG}.git "$SITE_HOME"
   mv -f "$TLDR_ARCHIVE" "$SITE_HOME/assets/"
   cp -f "$TLDRHOME/index.json" "$SITE_HOME/assets/"
 
