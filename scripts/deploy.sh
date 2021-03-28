@@ -14,16 +14,19 @@ function initialize {
 
   # Configure git.
   git config --global diff.zip.textconv "unzip -c -a"
-
+  ./scripts/build.sh
   # Decrypt and add deploy key.
-  eval "$(ssh-agent -s)"
-  cp /home/tmcox/.ssh/id_rsa .  
-  chmod 600 id_rsa
-  ssh-add id_rsa
+#  eval "$(ssh-agent -s)"
+ # cp /home/tmcox/.ssh/id_rsa .  
+ # chmod 600 id_rsa
+ # ssh-add id_rsa
 }
 
 function upload_assets {
-  git clone --quiet --depth 1 -b pages git@github.com:${SITE_REPO_SLUG}.git "$SITE_HOME"
+#  git clone --quiet --depth 1 -b pages git@github.com:${SITE_REPO_SLUG}.git "$SITE_HOME"
+  cd $SITE_HOME
+  git pull
+  cd -
   mv -f "$TLDR_ARCHIVE" "$SITE_HOME/assets/"
   cp -f "$TLDRHOME/index.json" "$SITE_HOME/assets/"
 
